@@ -1,7 +1,7 @@
 import re
 
 YOUTUBE_USERNAME_CHANNEL_LINK_PATTERN = re.compile(
-    r"^https?://(?:www\.)?youtube\.com/@[\w-]+/?$"
+    r"^https?://(?:www\.)?youtube\.com/@[\w.-]+/?$"
 )
 
 
