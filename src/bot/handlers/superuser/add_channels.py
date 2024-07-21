@@ -99,5 +99,19 @@ async def channel_file_handler(
 
     await state.clear()
 
+@add_channels_router.message(
+    Command("list_channels", "каналы"),
+    State(state="*"),
+)
+async def list_channels(message: Message, dal: DataAccessLayer, bot: Bot, **kwargs) -> None:
+    channels = await dal.get_channels()
+    if not channels:
+        await message.answer("No channels found.")
+        return
 
+    response = "Список отслеживаемых каналов:\n"
+    for channel in channels:
+        response += f"{channel.label}: {channel.url}\n"
+
+    await bot.send_message(chat_id=message.from_user.id, text=response)
 __all__ = ["add_channels_router"]
